@@ -94,7 +94,7 @@ Implementation details will be added in later modules
 ## 📃 Project Documentation
 This repository contains:
 - [sprint-1/](./sprint-1) - Sprint planning, execution and review artefacts
-- [Pull request template](pull_request_template.md) - Used for making a pull request to get the correct information for the issue
+-  [Pull request template](./.github/pull_request_template.md) - Used for making a pull request to get the correct information for the issue
 
 ## 🔃 Upcoming Documentation
 
