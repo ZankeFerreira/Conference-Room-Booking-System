@@ -5,6 +5,7 @@
 This project is for a **Conference Room Booking System** that allows employees to book and cancel rooms, for administators to access overall data and resolve conficts, and for rooms to be marked as under maintenance.   
 This system can be implemented at any business with a conference room that needs an efficient and easy way to navigate a scheduling application.
 
+---
 
 ## 📌 Purpose of This Repository
 
@@ -16,6 +17,19 @@ This repository is used for:
 
 
 At this stage, the repository focuses on **documentation and planning**, not a full system implementation.
+
+---
+
+Table of Contents
+- [Repository Contents](#-repository-contents)
+- [Installation](#️-installation)
+- [Usage](#-usage)
+- [Contributing](#-contributing)
+- [Developer Onboarding](#-developer-onboarding-in-progress)
+- [System Context](#️-system-context)
+- [Project Documentation](#-project-documentation)
+- [Upcoming Documentation](#-upcoming-documentation)
+- [License](#-licence)
 
 ---
 
