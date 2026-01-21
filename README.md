@@ -36,16 +36,20 @@ Table of Contents
 ## 🗂 Repository Contents
 
 - [README.md](README.md) – Basic project overview
-- [sprint-1](./sprint-1) – Sprint planning and execution artefacts created during Scrum simulations
-    * [Checkpoint](./sprint-1/checkpoint.md) - sprint 1 mid checkpoint docmentation
-    * [Dailies](./sprint-1/dailies.md) - the distribution of tasks for sprint 1
-    * [Planning](./sprint-1/planning.md) - the planning of sprint 1
-    * [Retrospective](./sprint-1/retrospective.md) - reflection of the communication and collaboration of sprint 1
-    * [Review](./sprint-1/review.md) - reflection of the work done in sprint 1
-    * [Summary](./sprint-1/summary.md) - overall summary of sprint 1
+- [sprint-1](./Sprints/sprint-1) – Sprint planning and execution artefacts created during Scrum simulations
+    * [Checkpoint](./Sprints/sprint-1/checkpoint.md) - sprint 1 mid checkpoint docmentation
+    * [Dailies](./Sprints/sprint-1/dailies.md) - the distribution of tasks for sprint 1
+    * [Planning](./Sprints/sprint-1/planning.md) - the planning of sprint 1
+    * [Retrospective](./Sprints/sprint-1/retrospective.md) - reflection of the communication and collaboration of sprint 1
+    * [Review](./Sprints/sprint-1/review.md) - reflection of the work done in sprint 1
+    * [Summary](./Sprints/sprint-1/summary.md) - overall summary of sprint 1
 - [.github](./.github) – GitHub files
     * [Pull request template](./.github/pull_request_template.md) - used to get the right information out of a pull request 
 - `LICENSE` – Project license
+- [api](./docs/api)
+    * [Documentation](./docs/api/api-documentation.yaml) - the yaml file containing the api documentation
+    * [Usage examples](./docs/api/API_EXAMPLES.md) - .json code of potential data for the api endpoints
+
 
 ---
 
@@ -57,6 +61,12 @@ To access the documents on your local computer:
     ```git clone "https://github.com/ZankeFerreira/Conference-Room-Booking-System.git"```
 3. Open the folder in the IDE
 
+To test the API documentation
+1. Download the [API documentation](./docs/api/api-documentation.yaml)
+2. Open Postman
+3. Select import and choose the downloaded .yaml file
+4. Select to make a new collection
+5. Choose an http method to test and click send
 
 Future iterations will introduce application code and setup instructions.
 
@@ -86,7 +96,7 @@ Contributors should:
 ## 👓 Developer Onboarding (In Progress)
 
 - This project has no official technologies that will be used as it is still in its planning phase
-- The planning for this project can be found at [sprint-1/](./sprint-1)
+- The planning for this project can be found at [sprint-1/](./Sprints/sprint-1)
 - Documentation is organised per sprint with a new folder made each time. The sprint planning, dailies, review, retrospective and summary must be included
 
 ---
@@ -102,18 +112,20 @@ The conference Booking System is a conceptual system intended to manage:
 
 At this stage, the system is documented through:
 - Sprint planning artefacts
+- API documentation
 
 Implementation details will be added in later modules
 
 ## 📃 Project Documentation
 This repository contains:
 - [sprint-1/](./sprint-1) - Sprint planning, execution and review artefacts
--  [Pull request template](./.github/pull_request_template.md) - Used for making a pull request to get the correct information for the issue
+- [Pull request template](pull_request_template.md) - Used for making a pull request to get the correct information for the issue
+- [API Documentation](./docs/api/api-documentation.yaml) - Used for implementing an API for the project
+
 
 ## 🔃 Upcoming Documentation
 
 The following sections will be added as the project evoles
-- API documentations (Swagger/OpenAPI)
 - Runtime instructions (Docker)
 - Developer setup and contribution workflows
 
