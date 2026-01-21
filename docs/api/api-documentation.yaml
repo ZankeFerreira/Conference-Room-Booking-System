@@ -1,0 +1,273 @@
+openapi: 3.0.4
+info:
+  title: Conference Room Booking API
+  description: |-
+    This is an API for booking and managing conference rooms
+
+    Some useful links:
+    - [The GitHub repository](https://github.com/ZankeFerreira/Conference-Room-Booking-System)
+  version: 1.0.0
+  contact:
+    name: Bookings Support
+    email: support@bookings.com
+
+servers:
+  - url: http://localhost:8080
+    description: Staging server
+  - url: https://api.company.com
+    description: Production server
+
+security:
+  - bearerAuth: []
+
+paths:
+
+  /auth/login:
+    post:
+      summary: Authenticate user
+      description: Authenticate a user and return a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Authentication successful
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /rooms:
+    get:
+      summary: Get rooms
+      description: Retrieve conference rooms with optional filters.
+      parameters:
+        - name: capacity
+          in: query
+          schema:
+            type: integer
+        - name: equipment
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Rooms retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+  /bookings:
+    post:
+      summary: Create booking
+      description: Book an available conference room.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '201':
+          description: Booking created successfully
+        '400':
+          description: Invalid booking data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Room unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    get:
+      summary: Get bookings
+      description: Retrieve bookings for the logged-in user or admin.
+      responses:
+        '200':
+          description: Bookings retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+
+  /bookings/recurring:
+    post:
+      summary: Create recurring booking
+      description: Create a recurring room booking.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '201':
+          description: Recurring booking created
+        '409':
+          description: Booking conflicts detected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bookings/{bookingId}:
+    delete:
+      summary: Cancel booking
+      description: Cancel an existing booking.
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Booking cancelled successfully
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Booking not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /admin/bookings:
+    get:
+      summary: View all bookings (admin)
+      description: Retrieve all bookings for administrative overview.
+      responses:
+        '200':
+          description: Admin bookings retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+
+  /admin/bookings/{bookingId}:
+    put:
+      summary: Resolve booking conflict
+      description: Modify a booking to resolve scheduling conflicts.
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '200':
+          description: Booking updated successfully
+        '409':
+          description: Conflict could not be resolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /rooms/{roomId}/maintenance:
+    post:
+      summary: Schedule room maintenance
+      description: Mark a room as unavailable for maintenance.
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '200':
+          description: Maintenance scheduled successfully
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        capacity:
+          type: integer
+        equipment:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          example: available
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        roomId:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        organiser:
+          type: string
+        isVisitor:
+          type: boolean
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
